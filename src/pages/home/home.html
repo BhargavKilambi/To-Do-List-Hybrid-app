@@ -1,0 +1,60 @@
+
+<ion-header>
+  <ion-navbar color="base">
+    <ion-title>
+      To-Do List
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="dd">
+   <ion-row>
+      <ion-input type="text" [(ngModel)]="newTask" required placeholder="New Task to do..." clearInput></ion-input>
+  </ion-row>
+  <ion-row class="bb">
+      <button ion-button (click)="addTask()" color="base" round >Add!</button>
+
+  </ion-row>
+  <!-- <form [formGroup]="orderForm" (ngSubmit)="submit();">
+         <ion-list>
+         <ion-item>
+           <ion-input type="text" [(ngModel)]="newTask" formControlName="newTask" [ngModelOptions]="{standalone:true}" placeholder="Add a new task.." clearInput></ion-input>
+         </ion-item>
+       </ion-list>
+       <button ion-button (click)="addTask()" round color="base" [disabled]="!orderForm.valid">Submit</button>
+       </form> -->
+  <h4>Slide left to delete tasks.</h4>
+  <ion-list no-lines>
+    <ion-item-sliding *ngFor="let item of taskItems | async">
+      <ion-item class="base2">
+        <ion-label>{{item.$value}}</ion-label>
+        <ion-checkbox color="primary" checked="false" (click)="finished(item.$value,item.$key)"></ion-checkbox>
+
+    </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="danger" icon-only (click)="removeTask(item.$key)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>
+
+  <ion-list no-lines>
+    <ion-item-sliding *ngFor="let fl of finList | async">
+      <ion-item>
+        <ion-label>{{fl.$value}}</ion-label>
+        <ion-checkbox color="secondary" checked="true"></ion-checkbox>
+
+    </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="danger" icon-only (click)="delfin(fl.$key)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
+<ion-footer class="foot">
+<p>&copy; Bhargav Ram</p>
+</ion-footer>
